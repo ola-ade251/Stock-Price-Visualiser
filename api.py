@@ -1,12 +1,11 @@
 import pandas as pd
+import yfinance as yf
 
 def get_stock_data(ticker: str) -> pd.DataFrame:        # take ticker string and returns the dataframe
-    #will call an api n return a dataframe with columns like date and closing price
+    #download data from yahoo finance so connect tot eh stock market
+    df =yf.download(ticker, period="1y")        #last year of data
 
-    #placeholder dataframe for testing
-    data = {
-        "date": pd.date_range(end=pd.Timestamp.today(), periods=10),
-        "close price": [100 +i for i in range(10)]      #list of closing prices
-    }
-    df = pd.DataFrame(data)         # turn dictionary into a table
+    df = df.reset_index()       #turn the date index into a column
+    df = df[['Date', 'Close']]
+
     return df

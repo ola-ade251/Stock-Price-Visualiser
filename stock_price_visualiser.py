@@ -19,17 +19,17 @@ def main():
     ticker, days = get_user_inp()
     if ticker is None or days is None:
         return 
-
+    
+    # - call a get stock data function using ticker from api
     print(f"fetching data for {ticker}")
     df = get_stock_data(ticker)
-    print("raw data: ")
-    print(df)
-
-    # fetch data -api
-    # - call a get stock data function using ticker from api
-    # - use days to filter
-    # - print stats
-    # - plot graphs
+    print("raw data:")
+    print(df)                   # print full table
+    
+    # filter the last n days
+    df_last_days = df.tail(days)
+    print(f"\nLast {days} days:")
+    print(df_last_days)         #print filtered table
 
 if __name__ == "__main__":
     main()
