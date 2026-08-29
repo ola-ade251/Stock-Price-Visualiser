@@ -1,4 +1,5 @@
 from api import get_stock_data
+import matplotlib.pyplot as plt
 
 def get_user_inp():
     ticker = input("Enter stock ticker(e.g, AAPL, TSLA): ").strip().upper()
@@ -47,6 +48,20 @@ def main():
     print(f"Lowest closing price: {lowest:.2f}")
     print(f"Average closing price: {average:.2f}")
     print(f"percent change over {days} days: {percent_change:.2f}")
+
+
+    #plotting graphs
+    plt.figure(figsize=(10, 5))
+    plt.plot(df_last_days['Date'], df_last_days['Close'], marker ='o', linestyle='-', color='blue')
+
+    plt.title(f"{ticker} closing prices (last {days} days)")
+    plt.xlabel("Date")
+    plt.ylabel("Closing price $")
+    plt.grid(True)
+    plt.xticks(rotation = 45)
+    plt.tight_layout()
+
+    plt.show()
 
 if __name__ == "__main__":
     main()
