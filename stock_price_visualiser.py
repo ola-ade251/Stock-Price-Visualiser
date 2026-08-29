@@ -31,5 +31,22 @@ def main():
     print(f"\nLast {days} days:")
     print(df_last_days)         #print filtered table
 
+
+    df_last_days = df_last_days.dropna(subset =['Close']) #remove last row if nan
+    #calc stats
+    highest = df_last_days['Close'].max()
+    lowest = df_last_days['Close'].min()
+    average = df_last_days['Close'].mean()
+
+    start_price = df_last_days['Close'].iloc[0]
+    end_price = df_last_days['Close'].iloc[-1]
+    percent_change = ((end_price - start_price) / start_price) * 100
+
+    print("\nStats:")
+    print(f"Highest closing price: {highest:.2f}")
+    print(f"Lowest closing price: {lowest:.2f}")
+    print(f"Average closing price: {average:.2f}")
+    print(f"percent change over {days} days: {percent_change:.2f}")
+
 if __name__ == "__main__":
     main()
